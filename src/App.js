@@ -2,15 +2,22 @@ import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 import { VStack } from "@chakra-ui/react";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [tasks, setTasks] = useState([
     { id: 1, task: "Homework", completed: false },
     { id: 2, task: "Study", completed: true },
   ]);
+
   const handleAdd = (taskInput) => {
     if (taskInput.trim()) {
-      setTasks([{ task: taskInput.trim(), completed: false }, ...tasks]);
+      const newTask = {
+        task: taskInput.trim(),
+        id: uuidv4(),
+        completed: false,
+      };
+      setTasks([newTask, ...tasks]);
     }
   };
   const handleDelete = (id) => {
@@ -19,13 +26,14 @@ function App() {
   };
   const handleTaskCompleted = (id) => {
     const newList = tasks.map((task) => {
-      if (task.id == id) {
+      if (task.id === id) {
         task.completed = !task.completed;
       }
       return task;
     });
     setTasks(newList);
   };
+
   return (
     <VStack
       pt="15rem"

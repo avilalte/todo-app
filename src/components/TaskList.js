@@ -5,15 +5,14 @@ import "../styles/styles.css";
 const TaskList = ({ setTasks, handleDelete, tasks, handleTaskCompleted }) => {
   return tasks.length ? (
     <VStack boxShadow="xl" w="25%" bg="white" borderRadius="lg" p={4}>
-      {tasks.map((task, ind) => {
-        task.id = ind + 1;
+      {tasks.map((task ) => {
         return (
           <Task
             task={task.task}
-            key={ind + 1}
-            id={ind + 1}
-            handleDelete={handleDelete}
+            key={task.id}
+            id={task.id}
             completed={task.completed}
+            handleDelete={handleDelete}
             setTasks={setTasks}
             handleTaskCompleted={handleTaskCompleted}
           />

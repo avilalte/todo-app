@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Spacer, Input, Button, HStack } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
-const TaskForm = ({ handleAdd, setTasks, tasks }) => {
+const TaskForm = ({ handleAdd }) => {
   const [taskInput, setTaskInput] = useState("");
 
   return (
@@ -12,7 +12,7 @@ const TaskForm = ({ handleAdd, setTasks, tasks }) => {
       onSubmit={(e) => {
         e.preventDefault();
         handleAdd(taskInput);
-        setTaskInput('');
+        setTaskInput("");
       }}
     >
       <HStack
@@ -30,7 +30,7 @@ const TaskForm = ({ handleAdd, setTasks, tasks }) => {
           onChange={(e) => setTaskInput(e.target.value)}
         />
         <Spacer minW=".1rem" />
-        <Button size="lg">
+        <Button type="submit" size="lg">
           Add
           <AddIcon ms={2} />
         </Button>
