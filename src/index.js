@@ -1,15 +1,20 @@
+import "animate.css";
+import "@fontsource/chilanka";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { ChakraProvider, theme } from "@chakra-ui/react";
-import "@fontsource/chilanka";
+import theme from "./theme";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Provider } from "react-redux";
 import { ColorModeScript } from "@chakra-ui/react";
-import "animate.css";
+import { store } from './app/store';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ChakraProvider>
-    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-    <App />
-  </ChakraProvider>
+  <Provider store={store}>
+    <ChakraProvider>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <App />
+    </ChakraProvider>
+  </Provider>
 );

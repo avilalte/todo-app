@@ -2,13 +2,16 @@
   --animate-duration: 700ms;
   --animate-delay: 1s;
 }
+html {
+  scroll-behavior: smooth;
+}
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 .form {
-  min-width: 30%;
+  width: 100%;
 }
 .task {
   font-family: "Chilanka", cursive;

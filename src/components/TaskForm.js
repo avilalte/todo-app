@@ -25,29 +25,29 @@ const TaskForm = ({ menuBorderColor, menuGradient, handleAdd }) => {
     >
       <HStack
         boxShadow={"md"}
-        w="100%"
-        p="1rem"
-        mb="1rem"
+        w='100%'
+        p={4}
         borderRadius="lg"
-        borderBottomWidth={4}
+        borderBottomWidth={6}
         borderColor={menuBorderColor}
         bgGradient={menuGradient}
         className="animate__animated animate__pulse"
       >
         <Input
           size="lg"
+          autoFocus
           placeholder="Write down a task"
           _placeholder={{
-            color: useColorModeValue("default", "purple.100"),
+            color: useColorModeValue("default", "gray.800"),
           }}
           color={useColorModeValue("default", "gray.800")}
           value={taskInput}
           bg={useColorModeValue("#fcf5ff", "#b29cd8")}
           onChange={(e) => setTaskInput(e.target.value)}
-          borderWidth={2}
+          borderWidth={1}
           maxLength={25}
-          borderColor={useColorModeValue("yellow.400", "#551a90.700")}
-          focusBorderColor={useColorModeValue("#ffd7fe", "#673e79")}
+          borderColor={useColorModeValue("yellow.400", "purple.400")}
+          focusBorderColor={useColorModeValue("#ffd7fe", "purple.400")}
           wordBreak={5}
         />
         <Spacer minW=".1rem" />

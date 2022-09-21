@@ -10,6 +10,7 @@ import {
   VStack,
   Heading,
   Link,
+  Flex,
   Button,
   useColorMode,
   useColorModeValue,
@@ -24,7 +25,10 @@ function App() {
   const handleAdd = (taskInput) => {
     if (taskInput.trim()) {
       const newTask = {
-        task: taskInput.trim(),
+        task: taskInput
+          .trim()[0]
+          .toUpperCase()
+          .concat(taskInput.trim().substring(1)),
         id: uuidv4(),
         completed: false,
       };
@@ -55,61 +59,77 @@ function App() {
     "linear(to-b, #191032, #1d153a, #211a43, #251f4c, #292455, #282556, #272656, #262757, #22234f, #1e2047, #1a1c3f, #161937)"
   );
   const menuBorderColor = useColorModeValue("yellow.400", "purple.400");
+
   return (
-    <VStack
-      justifyContent="center"
-      w="100%"
+    <Flex
+      w="100vw"
+      flexDirection="column"
+      justifyContent="space-between"
+      alignItems="center"
       minH="100vh"
       bgGradient={appBg}
-      pt={5}
-      pb={2}
       backgroundSize="cover"
       backgroundAttachment="fixed"
+      px={5}
+      py={5}
     >
       <Button
+        alignSelf="end"
         colorScheme="yellow"
         borderRadius={"1rem"}
-        alignSelf={"end"}
-        mr={5}
         onClick={toggleColorMode}
       >
         {colorMode !== "light" ? <SunIcon /> : <MoonIcon />}
       </Button>
-      <CheckIcon
-        color="pink.400"
-        w="60px"
-        h="60px"
-        borderRadius={10}
-        py={2}
-        px={3}
-        borderColor="yellow.400"
-        borderBottomWidth={2}
-      />
-      <Heading
-        className="animate__animated animate__pulse"
-        bgGradient="linear(to-l, #ff6cfd, #ffe089)"
-        bgClip="text"
-        as="h1"
-        size="2xl"
-        py={25}
-        fontWeight="extrabold"
+      <VStack
+        justifyContent="space-between"
+        alignItems="center"
+        maxW="600px"
+        minW="300px"
+        pb={2}
+        spacing={10}
       >
-        YET ANOTHER TODO APP
-      </Heading>
+        <CheckIcon
+          color="pink.400"
+          w="60px"
+          h="60px"
+          borderRadius={10}
+          py={2}
+          alignSelf="center"
+          px={3}
+          borderColor="yellow.400"
+          borderBottomWidth={2}
+        />
+        <Heading
+          className="animate__animated animate__pulse"
+          bgGradient="linear(to-l, #ff6cfd, #ffe089)"
+          bgClip="text"
+          textAlign="center"
+          as="h1"
+          size="2xl"
+          mb={1}
+          // borderWidth={2}
+          // borderColor="red"
+          fontWeight="extrabold"
+        >
+          YET ANOTHER TODO APP
+        </Heading>
 
-      <TaskForm
-        menuGradient={menuGradient}
-        menuBorderColor={menuBorderColor}
-        handleAdd={handleAdd}
-      />
-      <TaskList
-        tasks={tasks}
-        setTasks={setTasks}
-        menuGradient={menuGradient}
-        handleDelete={handleDelete}
-        handleTaskCompleted={handleTaskCompleted}
-      />
-      <Spacer />
+        <TaskForm
+          menuGradient={menuGradient}
+          menuBorderColor={menuBorderColor}
+          handleAdd={handleAdd}
+        />
+        <TaskList
+          tasks={tasks}
+          setTasks={setTasks}
+          menuBorderColor={menuBorderColor}
+          menuGradient={menuGradient}
+          handleDelete={handleDelete}
+          handleTaskCompleted={handleTaskCompleted}
+        />
+        <Spacer />
+      </VStack>
       <Link
         textDecor="none"
         color="yellow.100"
@@ -117,10 +137,11 @@ function App() {
         textShadow="2px 1px #463a4ebc"
         href="https://github.com/avilalte"
         isExternal
+        justifySelf='end'
       >
-        <Icon as={BsGithub} w={30} h={30} color="gray.100" />
+        <Icon as={BsGithub} w={30} h={30} color="yellow.100" />
       </Link>
-    </VStack>
+    </Flex>
   );
 }
 

@@ -1,4 +1,4 @@
-import { HStack, VStack, Text } from "@chakra-ui/react";
+import { HStack, VStack, Text, useColorModeValue } from "@chakra-ui/react";
 import Task from "../components/Task";
 import "../styles/styles.css";
 
@@ -10,20 +10,21 @@ const TaskList = ({
   menuBorderColor,
   handleTaskCompleted,
 }) => {
+
+const noTasksColor = useColorModeValue("yellow.200", 'pink.200');
+
   return tasks.length ? (
     <VStack
       boxShadow="xl"
       spacing="1rem"
       borderBottomWidth={6}
       borderColor={menuBorderColor}
-      minW="15%"
-      w="30%"
       borderRadius="xl"
-      px={5}
-      pt={5}
+      w='100%'
+      p={5}
       pb={7}
       bgGradient={menuGradient}
-      className="animate__animated animate__pulse"
+      className="task-list animate__animated animate__pulse"
     >
       {tasks.map((task) => {
         return (
@@ -40,13 +41,13 @@ const TaskList = ({
       })}
     </VStack>
   ) : (
-    <HStack mb={100}>
+    <HStack justifyContent='center' mb={100}>
       <Text
         p={5}
         borderBottomWidth={2}
         borderRadius={10}
         borderColor="yellow.400"
-        color="yellow.200"
+        color={noTasksColor}
       >
         There are no tasks
       </Text>
