@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 function App() {
   const state = useSelector((state) => state);
   const { colorMode, toggleColorMode } = useColorMode();
-   const statsColor = useColorModeValue("yellow.100", "purple.100");
+  const statsColor = useColorModeValue("yellow.100", "purple.100");
   const useStyle = (style) => {
     return useColorModeValue(...style);
   };
@@ -37,7 +37,7 @@ function App() {
       pt={5}
     >
       <Button
-        position="fixed"
+        position='fixed'
         zIndex="1"
         alignSelf="end"
         colorScheme="yellow"

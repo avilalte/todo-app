@@ -9,13 +9,17 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTask } from "../features/tasks/tasksSlice";
+import { addTask, deleteCompleted } from "../features/tasks/tasksSlice";
 import { v4 as uuidv4 } from "uuid";
 import "animate.css";
-import { focusBorderColor, menuBorderColor, menuGradient } from "../app/colorModeStyles";
+import {
+  focusBorderColor,
+  menuBorderColor,
+  menuGradient,
+} from "../app/colorModeStyles";
 
 const TaskForm = ({ useStyle }) => {
   const dispatch = useDispatch();
@@ -98,7 +102,7 @@ const TaskForm = ({ useStyle }) => {
             <Button
               type="submit"
               size="lg"
-              shadow='md'
+              shadow="md"
               colorScheme={useColorModeValue("yellow", "pink")}
               borderBottomWidth={3}
               borderColor={useStyle(menuBorderColor)}
@@ -107,14 +111,15 @@ const TaskForm = ({ useStyle }) => {
             </Button>
           </Tooltip>
         </HStack>
-        <HStack w="100%" p={2}>
+        <HStack gap={3} w="100%" alignSelf="start" p={2}>
           <Textarea
             onKeyDown={(e) => (e.key === "Enter" ? handleSubmit(e) : null)}
             resize="none"
+            size="lg"
+            maxWidth="85%"
             onChange={(e) => handleChange(e)}
             minHeight="70px"
             maxLength={100}
-            w="100%"
             placeholder="Add details (Optional)"
             _placeholder={{
               color: useColorModeValue("gray.400", "gray.600"),
@@ -127,6 +132,18 @@ const TaskForm = ({ useStyle }) => {
             borderColor={useColorModeValue("yellow.400", "purple.400")}
             focusBorderColor={useColorModeValue("#ffd7fe", "purple.400")}
           />
+          <Tooltip label="Delete completed tasks" placement="right" hasArrow>
+            <Button
+              onClick={() => dispatch(deleteCompleted())}
+              shadow="md"
+              size="lg"
+              colorScheme={useColorModeValue("yellow", "pink")}
+              borderBottomWidth={3}
+              borderColor={useStyle(menuBorderColor)}
+            >
+              <DeleteIcon />
+            </Button>
+          </Tooltip>
         </HStack>
       </VStack>
     </form>

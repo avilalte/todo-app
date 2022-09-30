@@ -2,7 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = [
   { id: 1, title: "Another task", description: "", completed: false },
-  { id: 2, title: "Sample task", description: "Sample description", completed: true },
+  {
+    id: 2,
+    title: "Sample task",
+    description: "Sample description",
+    completed: true,
+  },
 ];
 
 const tasksSlice = createSlice({
@@ -10,14 +15,17 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, { payload }) => {
-      state.unshift(payload)
+      state.unshift(payload);
     },
     deleteTask: (state, action) => {
       return state.filter((task) => task.id !== action.payload);
     },
+    deleteCompleted: (state, action) => {
+      return state.filter((task) => (task.completed === false));
+    },
     editTask: (state, action) => {
       const index = state.findIndex((task) => task.id === action.payload.id);
-      state[index]= {...state[index], ...action.payload.taskEdit};
+      state[index] = { ...state[index], ...action.payload.taskEdit };
     },
     toggleComplete: (state, action) => {
       const index = state.findIndex((task) => task.id === action.payload);
@@ -26,6 +34,11 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { addTask, deleteTask, editTask, toggleComplete } =
-  tasksSlice.actions;
+export const {
+  addTask,
+  deleteTask,
+  deleteCompleted,
+  editTask,
+  toggleComplete,
+} = tasksSlice.actions;
 export default tasksSlice.reducer;

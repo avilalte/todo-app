@@ -7,13 +7,14 @@ import { menuGradient, menuBorderColor } from "../app/colorModeStyles";
 const TaskList = ({ useStyle }) => {
   const noTasksColor = useColorModeValue("yellow.200", "pink.200");
   const tasks = useSelector((state) => state.tasks);
-  const setMenuGradient = useStyle(menuGradient);
+  const setMenuGradient = useColorModeValue(...menuGradient);
+  const setBorderColor = useColorModeValue(...menuBorderColor);
   return tasks.length ? (
     <VStack
       boxShadow="xl"
       spacing="1rem"
       borderBottomWidth={6}
-      borderColor={menuBorderColor}
+      borderColor={setBorderColor}
       borderRadius="xl"
       w="100%"
       p={5}
