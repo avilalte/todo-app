@@ -104,6 +104,7 @@ const Task = ({ title, id, completed, description }) => {
               opacity={completed ? 0.7 : 1}
               as={completed ? "del" : ""}
               fontSize="lg"
+              noOfLines={[1, 2, 3]}
             >
               {title}
             </Text>
@@ -127,8 +128,7 @@ const Task = ({ title, id, completed, description }) => {
             colorScheme={useColorModeValue("yellow", "purple")}
           >
             <ViewIcon />
-            /
-            <EditIcon opacity={0.7} />
+            {/* <EditIcon opacity={0.7} /> */}
           </Button>
         </Tooltip>
         <Tooltip label="Delete task" placement="right" hasArrow openDelay={300}>

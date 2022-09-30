@@ -89,10 +89,9 @@ const TaskForm = ({ useStyle }) => {
             value={taskInput.title}
             bg={useColorModeValue("#fcf5ff", "#d2bff3")}
             borderWidth={1}
-            maxLength={45}
+            maxLength={35}
             borderColor={useStyle(menuBorderColor)}
             focusBorderColor={useStyle(focusBorderColor)}
-            wordBreak={5}
           />
           <Spacer minW=".1rem" />
           <Tooltip label="Add new task" placement="right" hasArrow>
