@@ -1,4 +1,4 @@
-import { DeleteIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
+import { DeleteIcon, ViewIcon } from "@chakra-ui/icons";
 import { useDispatch } from "react-redux";
 import {
   deleteTask,
