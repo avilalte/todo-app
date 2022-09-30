@@ -1,7 +1,5 @@
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
-import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
 import { BsGithub } from "react-icons/bs";
 import { CheckIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
 import {
@@ -12,68 +10,35 @@ import {
   Link,
   Flex,
   Button,
+  Text,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { appBg } from "./app/colorModeStyles";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    { id: 1, task: "Homework", completed: false },
-    { id: 2, task: "Study", completed: true },
-  ]);
-
-  const handleAdd = (taskInput) => {
-    if (taskInput.trim()) {
-      const newTask = {
-        task: taskInput
-          .trim()[0]
-          .toUpperCase()
-          .concat(taskInput.trim().substring(1)),
-        id: uuidv4(),
-        completed: false,
-      };
-      setTasks([newTask, ...tasks]);
-    }
-  };
-  const handleDelete = (id) => {
-    const newList = tasks.filter((task) => task.id !== id);
-    setTasks(newList);
-  };
-  const handleTaskCompleted = (id) => {
-    const newList = tasks.map((task) => {
-      if (task.id === id) {
-        task.completed = !task.completed;
-      }
-      return task;
-    });
-    setTasks(newList);
-  };
+  const state = useSelector((state) => state);
   const { colorMode, toggleColorMode } = useColorMode();
-
-  const menuGradient = useColorModeValue(
-    "linear(to-t, #fff9eeff, #fffcf0e5)",
-    "linear(to-t, #66476d81, #cc9bd788)"
-  );
-  const appBg = useColorModeValue(
-    "linear(to-b, #513a87, #684d98, #7f60a9, #9574bb, #ac89cd)",
-    "linear(to-b, #191032, #1d153a, #211a43, #251f4c, #292455, #282556, #272656, #262757, #22234f, #1e2047, #1a1c3f, #161937)"
-  );
-  const menuBorderColor = useColorModeValue("yellow.400", "purple.400");
-
+   const statsColor = useColorModeValue("yellow.100", "purple.100");
+  const useStyle = (style) => {
+    return useColorModeValue(...style);
+  };
   return (
     <Flex
-      w="100vw"
+      w="100%"
       flexDirection="column"
-      justifyContent="space-between"
       alignItems="center"
       minH="100vh"
-      bgGradient={appBg}
+      bgGradient={useStyle(appBg)}
       backgroundSize="cover"
       backgroundAttachment="fixed"
       px={5}
-      py={5}
+      pt={5}
     >
       <Button
+        position="fixed"
+        zIndex="1"
         alignSelf="end"
         colorScheme="yellow"
         borderRadius={"1rem"}
@@ -86,8 +51,7 @@ function App() {
         alignItems="center"
         maxW="600px"
         minW="300px"
-        pb={2}
-        spacing={10}
+        spacing={5}
       >
         <CheckIcon
           color="pink.400"
@@ -107,37 +71,29 @@ function App() {
           textAlign="center"
           as="h1"
           size="2xl"
-          mb={1}
-          // borderWidth={2}
-          // borderColor="red"
+          py={7}
           fontWeight="extrabold"
         >
           YET ANOTHER TODO APP
         </Heading>
 
-        <TaskForm
-          menuGradient={menuGradient}
-          menuBorderColor={menuBorderColor}
-          handleAdd={handleAdd}
-        />
-        <TaskList
-          tasks={tasks}
-          setTasks={setTasks}
-          menuBorderColor={menuBorderColor}
-          menuGradient={menuGradient}
-          handleDelete={handleDelete}
-          handleTaskCompleted={handleTaskCompleted}
-        />
+        <TaskForm useStyle={useStyle} />
+        {state.tasks.length ? (
+          <Text color={statsColor} alignSelf="center" m={5}>
+            Total: {state.tasks.length} | Completed:{" "}
+            {state.tasks.filter((task) => task.completed === true).length}
+          </Text>
+        ) : null}
+        <TaskList useStyle={useStyle} />
         <Spacer />
       </VStack>
       <Link
         textDecor="none"
         color="yellow.100"
-        fontFamily=""
         textShadow="2px 1px #463a4ebc"
         href="https://github.com/avilalte"
         isExternal
-        justifySelf='end'
+        mt="7rem"
       >
         <Icon as={BsGithub} w={30} h={30} color="yellow.100" />
       </Link>

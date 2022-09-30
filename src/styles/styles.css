@@ -1,9 +1,14 @@
 :root {
-  --animate-duration: 700ms;
+  --animate-duration: 300ms;
   --animate-delay: 1s;
 }
 html {
   scroll-behavior: smooth;
+}
+body {
+  width: 100vw;
+  max-width: 100%;
+  font-family: sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -16,4 +21,5 @@ html {
 .task {
   font-family: "Chilanka", cursive;
   cursor: pointer;
+  transition: 0.1s;
 }
